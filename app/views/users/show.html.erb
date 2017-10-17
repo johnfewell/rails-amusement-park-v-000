@@ -1,0 +1,17 @@
+<h3>Welcome back to the theme park!</h3>
+<br />
+
+<div class="center">
+  <div class="pic">
+   <%= image_tag asset_path('avatar-1295404_640.png'), size: "250" %>
+  </div>
+
+  <div class="info">
+    <p><strong>Name:</strong> <%= @user.name %></p>
+    <p><strong>Tickets:</strong> <%= @user.tickets %></p>
+    <p><strong>Mood:</strong>  <%= @user.mood %></p>
+    <p><strong>Height:</strong> <%= @user.height %><br /></p>
+    <p><a href="<%= edit_user_url %>">Edit</a></p>
+    <p><a href="/attractions">See attractions</a></p>
+  </div>
+</div>
