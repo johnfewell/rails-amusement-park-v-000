@@ -19,5 +19,5 @@ class SessionsController < ApplicationController
     log_out
     redirect_to root_url
   end
-
+ #https://www.railstutorial.org/book/basic_login
 end
