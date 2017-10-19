@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
+  before_action :require_login
+  skip_before_action :require_login, only: [:new, :create]
+
 
   def new
     @user = User.new
@@ -34,13 +37,17 @@ class UsersController < ApplicationController
     end
   end
 
-  private
+private
 
-    def set_user
-      @user = User.find(params[:id])
-    end
+  def require_login
+    redirect_to '/' unless session.include? :user_id
+  end
 
-    def user_params
-      params.require(:user).permit(:id, :name, :nausea, :happiness, :tickets, :height, :password, :admin)
-    end
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def user_params
+    params.require(:user).permit(:id, :name, :nausea, :happiness, :tickets, :height, :password, :admin)
+  end
 end

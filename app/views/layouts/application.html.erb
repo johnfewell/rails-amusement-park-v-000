@@ -22,10 +22,11 @@
         <a class="navbar-brand" href="<%= root_url %>"/>Home</a>
         </div>
         <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="/users/new">Sign Up</a></li>
-            <li><a href="/signin">Sign In</a></li>
-          </ul>
+        <% if session.include? :user_id %>
+          <%= render 'navlogin' %>
+         <% else %>
+          <%= render 'navlogout' %>
+         <% end %>
         </div><!--/.nav-collapse -->
       </div>
     </div>
