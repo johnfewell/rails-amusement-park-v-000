@@ -1,16 +1,21 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update]
-  before_action :require_login
-  skip_before_action :require_login, only: [:new, :create]
+  include SessionsHelper
 
+  before_action :require_login, only: [:show, :edit, :update]
+  before_action :set_user, only: [:show, :edit, :update]
+  before_action :current_user, only: [:show, :edit, :update]
+
+  def hello
+    if session[:user_id]
+      set_user
+    end
+  end
 
   def new
     @user = User.new
   end
 
   def create
-    #raise params.inspect
-
     @user = User.new(user_params)
 
     if @user.save
@@ -32,20 +37,18 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       redirect_to user_path(@user), notice: 'User was successfully updated.'
-    else
+    else2
       render :edit
     end
   end
 
 private
 
-  def require_login
-    redirect_to '/' unless session.include? :user_id
-  end
 
   def set_user
     @user = User.find(params[:id])
   end
+
 
   def user_params
     params.require(:user).permit(:id, :name, :nausea, :happiness, :tickets, :height, :password, :admin)
