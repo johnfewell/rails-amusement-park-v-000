@@ -3,11 +3,11 @@ class UsersController < ApplicationController
 
   before_action :require_login, only: [:show, :edit, :update]
   before_action :set_user, only: [:show, :edit, :update]
-  before_action :current_user, only: [:show, :edit, :update]
+  before_action :current_user, only: [:show, :edit, :update, :go_on_ride]
 
   def hello
     if session[:user_id]
-      set_user
+      current_user
     end
   end
 
@@ -31,13 +31,15 @@ class UsersController < ApplicationController
   end
 
   def edit
-
+    if !current_user.admin?
+      redirect_to root_url
+    end
   end
 
   def update
     if @user.update(user_params)
       redirect_to user_path(@user), notice: 'User was successfully updated.'
-    else2
+    else
       render :edit
     end
   end

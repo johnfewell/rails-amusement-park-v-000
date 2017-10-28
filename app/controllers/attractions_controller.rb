@@ -9,6 +9,7 @@ class AttractionsController < ApplicationController
   end
 
   def new
+
   end
 
   def show
@@ -20,6 +21,8 @@ class AttractionsController < ApplicationController
 
   def update
   end
+
+
 
 private
 

@@ -1,4 +1,3 @@
-require 'pry'
 class SessionsController < ApplicationController
 
   def new
@@ -7,7 +6,6 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by_name(params[:user][:name])
-  #  binding.pry
     if @user
       session[:user_id] = @user.id
       redirect_to user_path(@user), notice: 'User was successfully created.'

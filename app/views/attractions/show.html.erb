@@ -14,6 +14,7 @@
     <% if @current_user.admin? %>
       <%= link_to 'Edit', edit_attraction_path(@attraction) %> |
     <% end %>
+    <%= button_to "Go on this ride", { :controller => "rides", :action => "take_a_ride", :attraction_id => @attraction.id, :current_user_id => @current_user.id}, :method => :post %>
     <%= link_to 'Back', attractions_path %>
   </div>
 </div>
