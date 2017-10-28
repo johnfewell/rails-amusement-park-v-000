@@ -1,6 +1,8 @@
 <h3>Welcome back to the theme park!</h3>
 <br />
-<p id="notice"><%= notice %></p>
+  <% if params[:message] %>
+    <div class="center alert"><%= params[:message] %></div>
+  <% end %>
 <div class="center">
   <div class="pic">
    <%= image_tag asset_path('avatar-1295404_640.png'), size: "250" %>
@@ -16,7 +18,9 @@
     <p><strong>Height:</strong> <%= @user.height %><br /></p>
     <% if @current_user.admin? %>
       <p><a href="<%= edit_user_url %>">Edit</a></p>
+
     <% end %>
     <p><a href="/attractions">See attractions</a></p>
+  
   </div>
 </div>
